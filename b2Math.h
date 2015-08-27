@@ -28,8 +28,12 @@
 // ARM Neon
 #define B2_TARGET_NEON
 // SSE
-#elif defined(__x86_64__) || defined(_M_X64) || defined(__x86_64__) || defined(_M_X64)
-#define B2_TARGET_SSE
+#elif defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86_FP) || defined __i386__
+#if !defined B2_TARGET_SSE
+#define B2_TARGET_SSE 3 // SSE3 (Atom - Q1'04)
+//#define B2_TARGET_SSE 4 // SSE4 (Pentium 4 - Q2'07) (use of _mm_dp_ps)
+//#define B2_TARGET_SSE 5 // FMA/LZN  (4th gen Intel Core - Q2'13) (use of _mm_fmadd_ps)
+#endif
 #endif
 
 #ifdef B2_TARGET_SSE
